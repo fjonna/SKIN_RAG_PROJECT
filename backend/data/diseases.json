@@ -1,0 +1,37 @@
+[
+    {
+      "name": "Eczema",
+      "symptoms": "dry skin, itching, redness, irritation, inflammation, rough skin",
+      "description": "Eczema is a skin condition that causes dryness, itching, redness, and irritation. It may appear on the face, hands, or other parts of the body.",
+      "risk_level": "moderate",
+      "next_steps": "Use moisturizers, avoid irritants, and consult a dermatologist if symptoms get worse."
+    },
+    {
+      "name": "Psoriasis",
+      "symptoms": "red patches, scales, thick skin, itching, inflammation",
+      "description": "Psoriasis is a chronic skin condition that causes red patches covered with white or silvery scales.",
+      "risk_level": "moderate to high",
+      "next_steps": "Consult a dermatologist, reduce stress, and follow the recommended treatment."
+    },
+    {
+      "name": "Acne",
+      "symptoms": "pimples, blackheads, whiteheads, inflammation, oily skin",
+      "description": "Acne is a common skin condition that appears with pimples, clogged pores, and inflammation.",
+      "risk_level": "usually low",
+      "next_steps": "Maintain good hygiene, use suitable skincare products, and see a doctor if it becomes severe."
+    },
+    {
+      "name": "Rosacea",
+      "symptoms": "facial redness, swelling, burning sensation, visible blood vessels",
+      "description": "Rosacea usually affects the face and causes persistent redness, sensitivity, and sometimes bumps.",
+      "risk_level": "moderate",
+      "next_steps": "Avoid heat and triggers, and consult a dermatologist."
+    },
+    {
+      "name": "Fungal Infection",
+      "symptoms": "itching, redness, circular patches, peeling skin, infection",
+      "description": "Fungal skin infections may cause patches, itching, and redness in different areas of the body.",
+      "risk_level": "moderate",
+      "next_steps": "Keep the area clean and dry, and use antifungal treatment based on medical advice."
+    }
+  ]
