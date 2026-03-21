@@ -207,3 +207,12 @@ marimo/_lsp/
 __marimo__/
 
 backend/index_store/
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
+
+backend/index_store/
+backend/temp_uploads/
+data/raw/

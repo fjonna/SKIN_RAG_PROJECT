@@ -1,8 +1,24 @@
-from fastapi import FastAPI
+import os
+import shutil
+from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
 from embedding_retrieval import search_diseases
+from image_search import search_image
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+UPLOAD_DIR = "temp_uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
 class DiagnosisRequest(BaseModel):
@@ -20,6 +36,24 @@ def diagnose(request: DiagnosisRequest):
     candidates = search_diseases(request.symptoms, request.top_k)
 
     return {
+        "mode": "text",
         "candidates": candidates,
+        "disclaimer": "This system is for informational purposes only and does not replace professional medical advice."
+    }
+
+
+@app.post("/diagnose-image")
+def diagnose_image(file: UploadFile = File(...), top_k: int = Form(3)):
+    temp_path = os.path.join(UPLOAD_DIR, file.filename)
+
+    with open(temp_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    candidates = search_image(temp_path, top_k=top_k)
+
+    return {
+        "mode": "image",
+        "candidates": candidates,
+        "explanation": "Results are based on visual similarity to known cases.",
         "disclaimer": "This system is for informational purposes only and does not replace professional medical advice."
     }
