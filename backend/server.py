@@ -1,14 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from retrieval import load_data, find_most_similar_disease
+from embedding_retrieval import search_diseases
 
 app = FastAPI()
-
-data = load_data()
 
 
 class DiagnosisRequest(BaseModel):
     symptoms: str
+    top_k: int = 3
 
 
 @app.get("/")
@@ -18,13 +17,9 @@ def home():
 
 @app.post("/diagnose")
 def diagnose(request: DiagnosisRequest):
-    result, score = find_most_similar_disease(request.symptoms, data)
+    candidates = search_diseases(request.symptoms, request.top_k)
 
     return {
-        "most_likely_disease": result["name"],
-        "description": result["description"],
-        "risk_level": result["risk_level"],
-        "next_steps": result["next_steps"],
-        "similarity_score": round(score, 3),
+        "candidates": candidates,
         "disclaimer": "This system is for informational purposes only and does not replace professional medical advice."
     }

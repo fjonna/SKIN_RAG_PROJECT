@@ -4,3 +4,7 @@ streamlit
 requests
 scikit-learn
 pydantic
+sentence-transformers
+faiss-cpu
+numpy
+pandas
