@@ -5,7 +5,7 @@ st.set_page_config(page_title="Skin Disease Assistant", layout="centered")
 
 st.title("Skin Disease Assistant")
 
-tab1, tab2 = st.tabs(["Text Search", "Image Search"])
+tab1, tab2, tab3 = st.tabs(["Text Search", "Image Search", "Multimodal Analysis"])
 
 with tab1:
     st.subheader("Describe symptoms")
@@ -47,6 +47,64 @@ with tab1:
 
             except Exception as e:
                 st.error(f"Connection error: {e}")
+
+with tab3:
+    st.subheader("Analyze symptoms and/or a skin image")
+
+    multimodal_symptoms = st.text_area(
+        "Describe your symptoms (optional)", key="multimodal_symptoms"
+    )
+    multimodal_file = st.file_uploader(
+        "Choose an image (optional)",
+        type=["jpg", "jpeg", "png"],
+        key="multimodal_uploader",
+    )
+    top_k_multimodal = st.slider(
+        "Number of combined candidates", 1, 5, 3, key="multimodal_slider"
+    )
+
+    if st.button("Analyze Multimodal"):
+        try:
+            form_data = {
+                "symptoms": multimodal_symptoms,
+                "top_k": top_k_multimodal,
+            }
+            # Supplying a harmless form part keeps text-only requests multipart/form-data.
+            files = {"_multipart": (None, "")}
+            if multimodal_file is not None:
+                files["file"] = (
+                    multimodal_file.name,
+                    multimodal_file.getvalue(),
+                    multimodal_file.type,
+                )
+
+            response = requests.post(
+                "http://127.0.0.1:8000/diagnose-multimodal",
+                data=form_data,
+                files=files,
+            )
+            result = response.json()
+
+            if response.status_code != 200:
+                st.error(f"Backend error: {response.text}")
+            elif "error" in result:
+                st.error(result["error"])
+            else:
+                st.subheader("Combined candidates")
+                for i, item in enumerate(result["candidates"], start=1):
+                    st.markdown(f"### {i}. {item['name']}")
+                    st.write(f"**Final score:** {item['final_score']}")
+                    st.write(f"**Text score:** {item['text_score']}")
+                    st.write(f"**Image score:** {item['image_score']}")
+                    st.write(f"**Source:** {item['source']}")
+                    st.write(f"**Description:** {item['description']}")
+                    st.write(f"**Risk level:** {item['risk_level']}")
+                    st.write(f"**Next steps:** {item['next_steps']}")
+                    st.divider()
+
+                st.info(result["disclaimer"])
+        except Exception as e:
+            st.error(f"Connection error: {e}")
 
 with tab2:
     st.subheader("Upload skin image")
