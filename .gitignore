@@ -216,3 +216,10 @@ venv/
 backend/index_store/
 backend/temp_uploads/
 data/raw/
+.idea/
+.venv/
+data/raw/
+backend/index_store/
+backend/temp_uploads/
+*.zip
+kaggle.json

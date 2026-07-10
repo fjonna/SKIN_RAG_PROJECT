@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from embedding_retrieval import search_diseases
-from image_search import search_image
 
 app = FastAPI()
 
@@ -49,7 +48,28 @@ def diagnose_image(file: UploadFile = File(...), top_k: int = Form(3)):
     with open(temp_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    candidates = search_image(temp_path, top_k=top_k)
+    if not os.path.exists(os.path.join("index_store", "image_index.faiss")):
+        return {
+            "error": (
+                "Image search index is missing. Add images to "
+                "data/raw/images/train, then run `python image_embeddings.py`."
+            )
+        }
+
+    try:
+        # Import lazily so the API can start before the image index is built.
+        from image_search import search_image
+
+        candidates = search_image(temp_path, top_k=top_k)
+    except FileNotFoundError:
+        return {
+            "error": (
+                "Image search index is missing. Add images to "
+                "data/raw/images/train, then run `python image_embeddings.py`."
+            )
+        }
+    except Exception as exc:
+        return {"error": f"Image search is unavailable: {exc}"}
 
     return {
         "mode": "image",
