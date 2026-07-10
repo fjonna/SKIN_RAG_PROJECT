@@ -1,37 +1,135 @@
 [
-    {
-      "name": "Eczema",
-      "symptoms": "dry skin, itching, redness, irritation, inflammation, rough skin",
-      "description": "Eczema is a skin condition that causes dryness, itching, redness, and irritation. It may appear on the face, hands, or other parts of the body.",
-      "risk_level": "moderate",
-      "next_steps": "Use moisturizers, avoid irritants, and consult a dermatologist if symptoms get worse."
-    },
-    {
-      "name": "Psoriasis",
-      "symptoms": "red patches, scales, thick skin, itching, inflammation",
-      "description": "Psoriasis is a chronic skin condition that causes red patches covered with white or silvery scales.",
-      "risk_level": "moderate to high",
-      "next_steps": "Consult a dermatologist, reduce stress, and follow the recommended treatment."
-    },
-    {
-      "name": "Acne",
-      "symptoms": "pimples, blackheads, whiteheads, inflammation, oily skin",
-      "description": "Acne is a common skin condition that appears with pimples, clogged pores, and inflammation.",
-      "risk_level": "usually low",
-      "next_steps": "Maintain good hygiene, use suitable skincare products, and see a doctor if it becomes severe."
-    },
-    {
-      "name": "Rosacea",
-      "symptoms": "facial redness, swelling, burning sensation, visible blood vessels",
-      "description": "Rosacea usually affects the face and causes persistent redness, sensitivity, and sometimes bumps.",
-      "risk_level": "moderate",
-      "next_steps": "Avoid heat and triggers, and consult a dermatologist."
-    },
-    {
-      "name": "Fungal Infection",
-      "symptoms": "itching, redness, circular patches, peeling skin, infection",
-      "description": "Fungal skin infections may cause patches, itching, and redness in different areas of the body.",
-      "risk_level": "moderate",
-      "next_steps": "Keep the area clean and dry, and use antifungal treatment based on medical advice."
-    }
-  ]
+  {
+    "name": "Acne and Rosacea",
+    "symptoms": "pimples, blackheads, whiteheads, papules, pustules, oily skin, facial redness, flushing, visible blood vessels, burning, sensitive facial skin",
+    "description": "Acne involves clogged pores and inflammatory breakouts, while rosacea is a long-term facial skin condition that commonly causes flushing, persistent redness, sensitivity, and acne-like bumps. They can look similar but have different triggers and treatments.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Use gentle skin care and avoid known irritants or triggers. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Actinic Keratosis",
+    "symptoms": "rough scaly patch, dry crusted spot, sandpaper texture, pink patch, red patch, brown patch, sun-exposed skin, tender spot",
+    "description": "Actinic keratosis is a rough, scaly skin growth that often develops on sun-exposed areas after long-term ultraviolet exposure. Some lesions can resemble other skin growths, and a clinician can determine whether evaluation or treatment is needed.",
+    "risk_level": "moderate",
+    "next_steps": "Protect exposed skin from ultraviolet light and arrange a skin examination for a new or changing rough spot. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Athlete Foot",
+    "symptoms": "itchy feet, peeling skin, flaky skin, scaling between toes, white soggy skin, cracked skin, red soles, foot blisters",
+    "description": "Athlete foot is a fungal infection of the skin of the feet, often affecting the spaces between the toes. Moist footwear and shared changing areas can encourage fungal growth, and the condition can spread to other skin areas or nails.",
+    "risk_level": "usually low",
+    "next_steps": "Keep feet clean and dry and seek advice about appropriate antifungal care. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Atopic Dermatitis",
+    "symptoms": "intense itching, dry skin, red rash, scaly patches, cracked skin, thickened skin, inflamed skin, weeping skin",
+    "description": "Atopic dermatitis is a common form of eczema in which the skin barrier is sensitive and inflamed. It often causes recurrent itchy, dry patches and may flare with irritants, allergens, climate changes, or scratching.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Use fragrance-free moisturizers and avoid personal triggers where possible. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Basal Cell Carcinoma",
+    "symptoms": "pearly bump, shiny nodule, nonhealing sore, bleeding spot, crusted lesion, pink growth, translucent bump, scar-like patch",
+    "description": "Basal cell carcinoma is a common skin cancer that often develops on chronically sun-exposed skin. It may grow slowly and can resemble a shiny bump, a sore that does not heal, or a scar-like patch; professional assessment is important.",
+    "risk_level": "high",
+    "next_steps": "Arrange prompt professional assessment for any new, changing, nonhealing, or recurring skin growth. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Benign Keratosis",
+    "symptoms": "waxy growth, raised rough spot, stuck-on lesion, tan patch, brown patch, scaly growth, crusty plaque",
+    "description": "Benign keratoses are noncancerous skin growths that can appear waxy, rough, or stuck onto the skin. They are common with age, but visual appearance alone cannot reliably distinguish every benign growth from other conditions.",
+    "risk_level": "usually low",
+    "next_steps": "Avoid picking or irritating the area and monitor for change. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Cellulitis",
+    "symptoms": "spreading redness, warm skin, swollen skin, tender skin, painful skin, red swollen area, skin tightness",
+    "description": "Cellulitis is a bacterial infection of deeper skin layers and can occur after a break in the skin. It commonly causes an expanding area of warmth, redness, swelling, and tenderness and needs timely clinical evaluation.",
+    "risk_level": "high",
+    "next_steps": "Seek prompt medical assessment rather than trying to self-diagnose a rapidly changing red area. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Chickenpox",
+    "symptoms": "itchy blister rash, small fluid-filled blisters, red spots, crusted spots, widespread skin rash, scratched lesions",
+    "description": "Chickenpox is a contagious viral illness that typically produces crops of itchy spots and fluid-filled blisters that later crust. Skin findings can overlap with other rashes, so evaluation is useful when the pattern is unusual or complications are a concern.",
+    "risk_level": "moderate",
+    "next_steps": "Avoid scratching and follow local public-health and clinical advice about contagious rashes. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Eczema",
+    "symptoms": "dry skin, itchy rash, red patches, rough skin, scaling, cracked skin, irritated skin, weeping eczema",
+    "description": "Eczema is a broad term for inflammatory skin conditions that can make skin dry, itchy, irritated, and prone to cracking. Symptoms may come and go and can be worsened by soaps, fragrances, allergens, or repeated scratching.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Use regular bland moisturizers and reduce exposure to irritants if possible. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Fungal Infection",
+    "symptoms": "itchy rash, scaly patches, peeling skin, red border, circular rash, flaky skin, cracked skin, skin irritation",
+    "description": "Fungal skin infections can affect different body areas and may cause itchy, scaly, peeling, or ring-shaped patches. The appearance varies by body site and skin tone, and correct treatment depends on confirming the likely cause.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Keep the affected skin clean and dry and avoid sharing towels or clothing. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Impetigo",
+    "symptoms": "honey-colored crust, yellow crust, red sores, blisters, oozing lesions, crusted rash, facial sores",
+    "description": "Impetigo is a contagious superficial bacterial skin infection, often seen as sores or blisters that break and form yellow or honey-colored crusts. It can spread through close contact or scratching and should be assessed for appropriate treatment.",
+    "risk_level": "moderate",
+    "next_steps": "Avoid touching or sharing items that contact the lesions and seek clinical advice about treatment. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Melanocytic Nevus",
+    "symptoms": "mole, brown spot, tan spot, dark skin spot, raised mole, flat mole, pigmented lesion, changing mole",
+    "description": "A melanocytic nevus, commonly called a mole, is a cluster of pigment-producing cells that may be flat or raised and range in color. Most are harmless, but new or changing pigmented lesions warrant professional evaluation.",
+    "risk_level": "usually low",
+    "next_steps": "Monitor moles for noticeable changes in size, shape, color, surface, or symptoms. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Melanoma",
+    "symptoms": "asymmetric mole, irregular border, multiple colors, dark changing spot, enlarging mole, bleeding mole, evolving pigmented lesion",
+    "description": "Melanoma is a potentially serious skin cancer that can develop in an existing mole or as a new pigmented lesion. Changes in asymmetry, border, color, diameter, or evolution are warning signs that require prompt professional assessment.",
+    "risk_level": "high",
+    "next_steps": "Seek prompt evaluation for a new, changing, dark, irregular, or bleeding skin lesion. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Nail Fungus",
+    "symptoms": "thickened nail, yellow nail, brown nail, brittle nail, crumbly nail, distorted nail, nail debris, lifting nail",
+    "description": "Nail fungus is a fungal infection that can make one or more nails thick, discolored, brittle, or distorted. It is often slow to improve and can be confused with injury, psoriasis, or other nail disorders.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Keep nails clean and dry and avoid sharing nail tools. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Psoriasis",
+    "symptoms": "well-defined red plaques, silvery scales, thick scaly skin, itchy plaques, cracked plaques, scalp scaling, inflamed patches",
+    "description": "Psoriasis is an immune-mediated inflammatory condition that often produces well-defined, thick, scaly plaques. It may affect the scalp, elbows, knees, or other areas and tends to follow a chronic pattern of flares and improvement.",
+    "risk_level": "moderate",
+    "next_steps": "Use gentle skin care and discuss recurring or extensive plaques with a clinician. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Ringworm",
+    "symptoms": "ring-shaped rash, circular scaly patch, raised red border, itchy patch, expanding rash, flaky skin, central clearing",
+    "description": "Ringworm is a fungal skin infection, not a worm. It often causes an itchy, scaly patch with a more noticeable outer edge, although its appearance can vary by location and skin tone.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Keep the area clean and dry and avoid sharing towels, clothing, or sports equipment. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Shingles",
+    "symptoms": "painful blister rash, burning skin, tingling skin, one-sided rash, grouped blisters, crusted blisters, sensitive skin",
+    "description": "Shingles occurs when the virus that causes chickenpox reactivates later in life. It commonly produces a painful, tingling, or itchy band of grouped blisters on one side of the body; early medical advice can be important.",
+    "risk_level": "moderate to high",
+    "next_steps": "Contact a healthcare professional promptly for a new painful blistering rash, especially near the eye or face. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Vascular Lesion",
+    "symptoms": "red spot, purple spot, vascular bump, red papule, bleeding vascular lesion, blanching lesion, clustered red vessels",
+    "description": "Vascular lesions are skin marks or growths involving blood vessels and can range from small red spots to raised lesions. Many are benign, but a new, changing, recurrently bleeding, or atypical lesion should be examined by a clinician.",
+    "risk_level": "usually low to moderate",
+    "next_steps": "Avoid picking at a vascular-looking lesion and monitor it for change or bleeding. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  },
+  {
+    "name": "Warts and Molluscum",
+    "symptoms": "rough skin bump, wart, skin-colored papules, umbilicated bumps, clustered bumps, raised lesion, itchy bumps",
+    "description": "Warts and molluscum are common viral skin conditions that can cause small raised bumps. Warts often feel rough, while molluscum lesions may have a central indentation; both can spread through contact or scratching.",
+    "risk_level": "usually low",
+    "next_steps": "Avoid picking, shaving over, or sharing personal items that contact the bumps. Consult a dermatologist or healthcare professional when symptoms are severe, persistent, spreading, painful, infected, bleeding, or suspicious."
+  }
+]
