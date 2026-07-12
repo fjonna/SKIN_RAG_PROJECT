@@ -147,6 +147,7 @@ def diagnose_multimodal(
             "description": result["description"],
             "risk_level": result["risk_level"],
             "next_steps": result["next_steps"],
+            "similar_image_path": None,
         }
 
     for result in image_results:
@@ -157,6 +158,7 @@ def diagnose_multimodal(
             candidate["image_score"] = image_score
             candidate["final_score"] += 0.55 * image_score
             candidate["source"] = "both"
+            candidate["similar_image_path"] = result.get("example_path")
         else:
             combined[key] = {
                 "name": result["label"],
@@ -167,6 +169,7 @@ def diagnose_multimodal(
                 "description": "Result based on visual similarity with indexed skin disease images.",
                 "risk_level": "unknown",
                 "next_steps": "Consult a dermatologist or healthcare professional for proper evaluation.",
+                "similar_image_path": result.get("example_path"),
             }
 
     candidates = sorted(
@@ -180,5 +183,6 @@ def diagnose_multimodal(
     return {
         "mode": "multimodal",
         "candidates": candidates,
+        "final_explanation": None,
         "disclaimer": "This system is for informational purposes only and does not replace professional medical advice.",
     }
