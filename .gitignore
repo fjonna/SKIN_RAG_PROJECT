@@ -223,3 +223,14 @@ backend/index_store/
 backend/temp_uploads/
 *.zip
 kaggle.json
+
+.venv/
+venv/
+.idea/
+data/raw/
+backend/index_store/
+backend/temp_uploads/
+__pycache__/
+*.pyc
+*.zip
+kaggle.json
