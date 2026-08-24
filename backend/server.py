@@ -1,16 +1,19 @@
 import os
 import shutil
 from uuid import uuid4
+from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+load_dotenv()
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -44,20 +47,21 @@ def diagnose(request: DiagnosisRequest):
 
 @app.post("/diagnose-image")
 def diagnose_image(file: UploadFile = File(...), top_k: int = Form(3)):
-    temp_path = os.path.join(UPLOAD_DIR, file.filename)
-
-    with open(temp_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
     if not os.path.exists(os.path.join("index_store", "image_index.faiss")):
         return {
             "error": (
                 "Image search index is missing. Add images to "
-                "data/raw/images/train, then run `python image_embeddings.py`."
+                "data/raw/images/train_balanced, then run "
+                "`python image_embeddings.py` from the backend folder."
             )
         }
 
+    filename = os.path.basename(file.filename or "uploaded_image")
+    temp_path = os.path.join(UPLOAD_DIR, f"{uuid4().hex}_{filename}")
     try:
+        with open(temp_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
         # Import lazily so the API can start before the image index is built.
         from image_search import search_image
 
@@ -66,11 +70,15 @@ def diagnose_image(file: UploadFile = File(...), top_k: int = Form(3)):
         return {
             "error": (
                 "Image search index is missing. Add images to "
-                "data/raw/images/train, then run `python image_embeddings.py`."
+                "data/raw/images/train_balanced, then run "
+                "`python image_embeddings.py` from the backend folder."
             )
         }
     except Exception as exc:
         return {"error": f"Image search is unavailable: {exc}"}
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
 
     return {
         "mode": "image",
@@ -132,16 +140,23 @@ def diagnose_multimodal(
             if os.path.exists(temp_path):
                 os.remove(temp_path)
 
+    from embedding_retrieval import get_disease_info
+
     def normalized_name(name: str) -> str:
         return "".join(name.lower().split())
 
     combined = {}
     for result in text_results:
-        key = normalized_name(result["name"])
+        key = normalized_name(result["disease"])
+        text_score = float(result["confidence"])
+        existing = combined.get(key)
+        if existing is not None and existing["text_score"] >= text_score:
+            continue
+
         combined[key] = {
-            "name": result["name"],
-            "final_score": 0.45 * float(result["confidence"]),
-            "text_score": float(result["confidence"]),
+            "name": result["disease"],
+            "final_score": 0.45 * text_score,
+            "text_score": text_score,
             "image_score": 0.0,
             "source": "text",
             "description": result["description"],
@@ -160,15 +175,24 @@ def diagnose_multimodal(
             candidate["source"] = "both"
             candidate["similar_image_path"] = result.get("example_path")
         else:
+            disease_info = get_disease_info(result["label"])
             combined[key] = {
                 "name": result["label"],
                 "final_score": 0.55 * image_score,
                 "text_score": 0.0,
                 "image_score": image_score,
                 "source": "image",
-                "description": "Result based on visual similarity with indexed skin disease images.",
-                "risk_level": "unknown",
-                "next_steps": "Consult a dermatologist or healthcare professional for proper evaluation.",
+                "description": (
+                    disease_info["full_text"]
+                    if disease_info
+                    else "Result based on visual similarity with indexed skin disease images."
+                ),
+                "risk_level": disease_info["risk_level"] if disease_info else "Unknown",
+                "next_steps": (
+                    disease_info["next_steps"]
+                    if disease_info
+                    else "Consult a dermatologist or healthcare professional for proper evaluation."
+                ),
                 "similar_image_path": result.get("example_path"),
             }
 
@@ -180,9 +204,15 @@ def diagnose_multimodal(
         candidate["text_score"] = round(candidate["text_score"], 3)
         candidate["image_score"] = round(candidate["image_score"], 3)
 
+    from generation import generate_explanation
+
+    final_explanation = generate_explanation(
+        candidates, symptoms=symptoms, has_image=file is not None
+    )
+
     return {
         "mode": "multimodal",
         "candidates": candidates,
-        "final_explanation": None,
+        "final_explanation": final_explanation,
         "disclaimer": "This system is for informational purposes only and does not replace professional medical advice.",
     }

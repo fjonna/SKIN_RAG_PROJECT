@@ -18,11 +18,6 @@ index = faiss.read_index(INDEX_PATH)
 label_data = np.load(LABELS_PATH, allow_pickle=True)
 
 
-# 🔹 clean labels (fix ugly names)
-def clean_label(label):
-    return label.replace(" Photos", "").replace("_", " ")
-
-
 # 🔹 main search function
 def search_image(image_path, top_k=3, initial_k=10):
     image = preprocess(Image.open(image_path).convert("RGB")).unsqueeze(0).to(device)
@@ -41,8 +36,7 @@ def search_image(image_path, top_k=3, initial_k=10):
     # 🔥 group results by class
     for score, idx in zip(scores[0], indices[0]):
         label, path = label_data[idx]
-
-        label = clean_label(str(label))  # FIX label
+        label = str(label)
 
         class_scores[label].append(float(score))
 
