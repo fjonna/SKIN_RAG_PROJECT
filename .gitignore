@@ -206,31 +206,18 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-backend/index_store/
-__pycache__/
-*.pyc
+# Project-specific
+.venv/
+venv/
 env/
-venv/
-.venv/
-
-backend/index_store/
-backend/temp_uploads/
-data/raw/
 .idea/
-.venv/
-data/raw/
-backend/index_store/
-backend/temp_uploads/
-*.zip
-kaggle.json
-
-.venv/
-venv/
-.idea/
-data/raw/
-backend/index_store/
-backend/temp_uploads/
 __pycache__/
 *.pyc
 *.zip
 kaggle.json
+data/raw/
+backend/index_store/
+backend/temp_uploads/
+
+# Cached retrieval results for fusion experiments (regenerate with evaluation/cache_retrieval.py)
+evaluation/cache/

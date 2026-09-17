@@ -9,6 +9,12 @@ Pimples, blackheads, whiteheads, papules, pustules, oily skin, flushing, redness
 ## Visual Appearance
 Breakouts or persistent red facial areas with visible vessels may occur.
 
+## Distinguishing Features
+Acne produces comedones -- blackheads and whiteheads -- which rosacea never does. Rosacea instead shows persistent central facial redness, easy flushing and fine visible blood vessels, often with a burning or stinging feeling rather than simple itch. Unlike perioral dermatitis, the rash does not spare a clear rim around the lips. Unlike an acute infection the course is chronic, fluctuating over months to years.
+
+## Typical Location and Pattern
+Face above all: forehead, cheeks, nose, chin and jawline. Acne also affects the chest, shoulders and upper back. Rosacea concentrates over the central face and may thicken the nose over time. Flares follow heat, sun, alcohol, spicy food and stress.
+
 ## Possible Causes
 Blocked follicles, inflammation, and individual rosacea triggers such as heat or irritating products can contribute.
 

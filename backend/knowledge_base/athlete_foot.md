@@ -9,6 +9,12 @@ Itchy feet, peeling or flaky skin, scaling between toes, white soggy skin, crack
 ## Visual Appearance
 White, peeling, or red patches can appear between toes, on soles, or on foot sides.
 
+## Distinguishing Features
+The infection is confined to the feet and typically begins in the tight space between the fourth and fifth toes, where skin turns white, soggy and macerated. Unlike eczema it is often asymmetric, affecting one foot more than the other, and it starts between the toes rather than on the top of the foot. Unlike psoriasis there is no thick silvery plaque. A moccasin pattern of fine dry scaling across the sole and heel is a second common form.
+
+## Typical Location and Pattern
+Between the toes first, then the soles, heels and sides of the feet. Spreads in damp communal places -- showers, pools, changing rooms -- and is worsened by occlusive shoes and sweating. It may spread to the toenails or to the hand.
+
 ## Possible Causes
 Fungi thrive in warm, damp environments and can spread in shared changing areas.
 

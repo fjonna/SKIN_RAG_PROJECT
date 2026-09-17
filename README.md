@@ -23,7 +23,6 @@ A multimodal retrieval-augmented (RAG) assistant for skin condition information.
 │   ├── image_embeddings.py      # Builds the FAISS image index from the training images
 │   ├── image_search.py          # CLIP-based image similarity search
 │   ├── generation.py            # LLM-based (Claude) explanation generation, with fallback
-│   ├── preprocess_images.py     # Dataset inspection helper
 │   └── knowledge_base/          # Markdown reference documents, one per skin condition
 ├── frontend/
 │   └── client.py                # Streamlit UI

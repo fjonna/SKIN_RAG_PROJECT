@@ -9,6 +9,12 @@ Rough scaly patch, dry crusted spot, sandpaper texture, pink, red, or brown patc
 ## Visual Appearance
 Often a persistent rough spot on the face, ears, scalp, hands, or neck.
 
+## Distinguishing Features
+This lesion is better felt than seen: a gritty, sandpaper-like roughness on chronically sun-damaged skin, sometimes easier to detect with a fingertip than with the eye. Unlike seborrheic keratosis it is not waxy and does not look stuck onto the surface. Unlike basal cell carcinoma it is not pearly, translucent or rolled at the edge. It is a precancerous change that can progress to squamous cell carcinoma if untreated.
+
+## Typical Location and Pattern
+Sites with lifelong sun exposure: bald scalp, forehead, temples, ears, nose, cheeks, the backs of the hands and forearms, and the lower lip. Lesions are usually multiple and appear on skin that is already weathered, freckled or wrinkled.
+
 ## Possible Causes
 Long-term ultraviolet exposure from sunlight or indoor tanning.
 

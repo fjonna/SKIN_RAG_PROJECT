@@ -98,11 +98,17 @@ def diagnose_multimodal(
     if not has_symptoms and file is None:
         return {"error": "Please provide symptoms, an image, or both."}
 
+    from fusion import IMAGE_CANDIDATES, IMAGE_NEIGHBOURS, TEXT_CANDIDATES, fuse
+
     text_results = []
     if has_symptoms:
         from embedding_retrieval import search_diseases
 
-        text_results = search_diseases(symptoms.strip(), top_k=5)
+        # Every knowledge-base document, not just the top few: one document per
+        # class means this yields a text score for every class the image index
+        # can return, which is what keeps fusion a re-ranking over the full
+        # class space. See fusion.py for the measurements behind this.
+        text_results = search_diseases(symptoms.strip(), top_k=TEXT_CANDIDATES)
 
     image_results = []
     if file is not None:
@@ -125,7 +131,12 @@ def diagnose_multimodal(
 
             from image_search import search_image
 
-            image_results = search_image(temp_path, top_k=5)
+            # A tighter neighbour pool than the image-only endpoint uses: with
+            # 5 neighbours the per-class mean cosine stays sharp, which is what
+            # fusion needs. Cross-validated in evaluation/fusion_cv.py.
+            image_results = search_image(
+                temp_path, top_k=IMAGE_CANDIDATES, initial_k=IMAGE_NEIGHBOURS
+            )
         except FileNotFoundError:
             return {
                 "error": (
@@ -142,67 +153,30 @@ def diagnose_multimodal(
 
     from embedding_retrieval import get_disease_info
 
-    def normalized_name(name: str) -> str:
-        return "".join(name.lower().split())
+    ranked = fuse(text_results, image_results)[:top_k]
 
-    combined = {}
-    for result in text_results:
-        key = normalized_name(result["disease"])
-        text_score = float(result["confidence"])
-        existing = combined.get(key)
-        if existing is not None and existing["text_score"] >= text_score:
-            continue
-
-        combined[key] = {
-            "name": result["disease"],
-            "final_score": 0.45 * text_score,
-            "text_score": text_score,
-            "image_score": 0.0,
-            "source": "text",
-            "description": result["description"],
-            "risk_level": result["risk_level"],
-            "next_steps": result["next_steps"],
-            "similar_image_path": None,
-        }
-
-    for result in image_results:
-        key = normalized_name(result["label"])
-        image_score = float(result["confidence"])
-        if key in combined:
-            candidate = combined[key]
-            candidate["image_score"] = image_score
-            candidate["final_score"] += 0.55 * image_score
-            candidate["source"] = "both"
-            candidate["similar_image_path"] = result.get("example_path")
-        else:
-            disease_info = get_disease_info(result["label"])
-            combined[key] = {
-                "name": result["label"],
-                "final_score": 0.55 * image_score,
-                "text_score": 0.0,
-                "image_score": image_score,
-                "source": "image",
-                "description": (
-                    disease_info["full_text"]
-                    if disease_info
-                    else "Result based on visual similarity with indexed skin disease images."
-                ),
-                "risk_level": disease_info["risk_level"] if disease_info else "Unknown",
-                "next_steps": (
-                    disease_info["next_steps"]
-                    if disease_info
-                    else "Consult a dermatologist or healthcare professional for proper evaluation."
-                ),
-                "similar_image_path": result.get("example_path"),
-            }
-
-    candidates = sorted(
-        combined.values(), key=lambda candidate: candidate["final_score"], reverse=True
-    )[:top_k]
-    for candidate in candidates:
-        candidate["final_score"] = round(candidate["final_score"], 3)
-        candidate["text_score"] = round(candidate["text_score"], 3)
-        candidate["image_score"] = round(candidate["image_score"], 3)
+    candidates = []
+    for candidate in ranked:
+        disease_info = get_disease_info(candidate["name"])
+        candidates.append({
+            "name": candidate["name"],
+            "final_score": round(candidate["final_score"], 3),
+            "text_score": round(candidate["text_score"], 3),
+            "image_score": round(candidate["image_score"], 3),
+            "source": candidate["source"],
+            "description": (
+                disease_info["full_text"]
+                if disease_info
+                else "Result based on visual similarity with indexed skin disease images."
+            ),
+            "risk_level": disease_info["risk_level"] if disease_info else "Unknown",
+            "next_steps": (
+                disease_info["next_steps"]
+                if disease_info
+                else "Consult a dermatologist or healthcare professional for proper evaluation."
+            ),
+            "similar_image_path": candidate["similar_image_path"],
+        })
 
     from generation import generate_explanation
 
